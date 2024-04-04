@@ -1,0 +1,5 @@
+Serial_Number,Component,Comp. status,Est. life,Date code,Due date,Service status,Index,Key
+a-b-c,Component,Comp. status,Est. life,Date code,Due date,Service status,1,a-b-c:1
+a-b-c,M4 Display,Past Due,-3,7/13/2001,7/13/2021,EOSL,2,a-b-c:2
+d-e-f,Component,Comp. status,Est. life,Date code,Due date,Service status,1,d-e-f:1
+d-e-f,PDU,Due After 3 Years,24,5/12/2018,5/12/2048,Life,2,d-e-f:2

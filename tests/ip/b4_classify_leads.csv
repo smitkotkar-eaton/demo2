@@ -1,0 +1,5 @@
+Job_Index,Total_Quantity,Component,Component_Description,key,End of Prod,Status,Life__Years,EOSL,flag_raise_in_gp,SerialNumber_M2M,Product_M2M_Org,InstallDate,key_value,lead_match,lead_id_basedon
+1234.0,23.0,Monochrome Display,,rpp,,Active,10.0,,,123-3211,rpp,1/16/2081,rpp,exact,Product_M2M
+1234.0,23.0,Color Display,,pdu,,Active,10.0,,,123-3210,pdu,1/16/2081,pdu,contains,Product_M2M
+1234.0,23.0,,,,,,,,,123-3212,sts,1/16/2081,sts,contains,Product_M2M
+1234.0,23.0,8212 Display,,sts,,Active,10.0,,,123-3212,sts,1/16/2081,sts,begins_with,Product_M2M

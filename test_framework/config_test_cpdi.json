@@ -1,0 +1,52 @@
+{
+    "Contracts": {
+        "fp_cur_release": "C:\\ileads_dev\\new\\ileads_lead_generation\\result_20231006\\output_iLead_20231019.csv",
+        "dict_col_mapping": {
+            "SrNum": "SerialNumber",
+            "Contract_Start_Date": "Contract_Header_Start_Date",
+            "Contract_End_Date": "Contract_Header_End_Date",
+            "Warranty_End_Date": "Warranty_End",
+            "Warranty_Conversion": "ContractConversion",
+            "Latest_contract_date": "latest_contract"
+        },
+        "fp_prev_release": "C:\\ileads_cpdi\\reports_V1_2_20230911\\output_iLead_checkContract.csv",
+        "run_attach_rate": "True"
+    },
+    "Contracts_attach_rate": {
+        "fp_cur_release": "C:\\ileads_cpdi\\result_20231006\\contracts_attach_rate_20231006.csv",
+        "dict_col_mapping": {
+            "SrNum": "SerialNumber",
+            "date": "Date",
+            "contract_beg_date": "Contract_Beg"
+        },
+        "fp_prev_release": "C:\\ileads_cpdi\\reports_V1_2_20230911\\contracts_attach_rate.csv",
+        "expected_columns": [
+            "SerialNumber",
+            "Model_Id_Short",
+            "AsOfDate",
+            "InstallDate",
+            "Date",
+            "Units_Under_Contract",
+            "Age",
+            "Market Size",
+            "Old Market Size",
+            "adjustment",
+            "year_grouping",
+            "Contract_Type",
+            "warranty_over_contract",
+            "contract_over_warranty",
+            "ContractCoverage",
+            "ContractCoverageDescription",
+            "ContractCoverageType",
+            "Contract_Beg",
+            "Contract_End",
+            "WarrantyCoverage",
+            "WarrantyCoverageDescription",
+            "WarrantyCoverageType",
+            "Warranty_Beg",
+            "Warranty_End",
+            "Serial_Number"
+        ]
+    }
+
+}

@@ -1,0 +1,7 @@
+Serial_Number,variable,value
+test1, State,"TX, USA"
+test1,City,"city1, TX, USA"
+test1,Site,"add1, city1, TX, USA"
+test2, State,"PA, USA"
+test2,City,"city2, PA, USA"
+test2,Site,"add2, city2, PA, USA"
