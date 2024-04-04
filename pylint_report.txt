@@ -1,0 +1,7 @@
+************* Module ilead_erp_sync
+iLead_ERP_sync\__init__.py:71:25: E1120: No value for argument 'dict_map' in unbound method call (no-value-for-parameter)
+iLead_ERP_sync\__init__.py:75:4: R1720: Unnecessary "else" after "raise" (no-else-raise)
+
+------------------------------------------------------------------
+Your code has been rated at 8.06/10 (previous run: 8.06/10, +0.00)
+

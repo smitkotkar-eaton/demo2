@@ -1,0 +1,31 @@
+# DO NOT include azure-functions-worker in this file
+# The Python Worker is managed by Azure Functions platform
+# Manually managing azure-functions-worker may cause unexpected issues
+
+
+azure-functions==1.12.0
+azure-storage-file-datalake==12.14.0
+azure-identity==1.12.0
+azure-keyvault-secrets==4.7.0
+azure-storage-blob
+pandas==2.0.3
+pyarrow==13.0.0
+numpy==1.25.1
+usaddress==0.5.10
+pip==23.1.2
+PyJWT==2.5.0
+PyYAML
+pyzipcode
+config
+python-dateutil
+pyodbc
+sqlalchemy
+openpyxl
+pytest-azurepipelines
+pylint
+pylint-exit
+pylint-json2html
+pytest-cov
+mock
+requests
+pytest

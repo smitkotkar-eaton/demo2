@@ -1,0 +1,106 @@
+{
+    "ERPSummarys": [
+        {
+            "SerialNumber": "Auto_13",
+            "NumberOfCabinets": 7,
+            "ElectricRoomCleanliness": 2,
+            "LastServiceDate": "2014-02-14T01:01:11",
+            "CreationDate": "2024-02-25T00:13:04",
+            "CreatedBy": 3778,
+            "LastUpdateDate": "2024-02-25T00:13:04",
+            "LastUpdatedBy": 3778,
+            "Status": "PENDING",
+            "RecordId": 884879800,
+            "RequestId": "276742248"
+        },
+        {
+            "SerialNumber": "Auto_12",
+            "Upm2FanServiceDate": "2006-05-20T09:52:34",
+            "BatteryStrings": 20,
+            "BatteryCabinetType": 114020033,
+            "ElectricAirFilterServiceDate": "2013-10-29T04:05:06",
+            "CreationDate": "2024-02-25T00:13:04",
+            "CreatedBy": 3778,
+            "LastUpdateDate": "2024-02-25T00:13:04",
+            "LastUpdatedBy": 3778,
+            "Status": "PENDING",
+            "RecordId": 884879800,
+            "RequestId": "168575735"
+        },
+        {
+            "SerialNumber": "Auto_11",
+            "BatteryMonitoring": 114020023,
+            "Upm3FanServiceDate": "2008-10-14T09:53:34",
+            "Upm4FanServiceDate": "2005-01-14T09:54:34",
+            "CreationDate": "2024-02-25T00:13:04",
+            "CreatedBy": 3778,
+            "LastUpdateDate": "2024-02-25T00:13:04",
+            "LastUpdatedBy": 3778,
+            "Status": "PENDING",
+            "RecordId": 884879800,
+            "RequestId": "50746585"
+        },
+        {
+            "SerialNumber": "Auto_14",
+            "Current": 1,
+            "SystemModstamp": "2023-02-01T03:05:43.000+0000",
+            "BatteryJarsPerTray": 3,
+            "BatteryTraysPerString": 2,
+            "BatteryMonitoring": 114020005,
+            "NumberOfCabinets": 3,
+            "ElectricRoomCleanliness": 9,
+            "Upm2FanServiceDate": "2011-05-21T09:52:35",
+            "Upm3FanServiceDate": "2010-06-11T09:53:35",
+            "Upm4FanServiceDate": "2023-12-22T09:54:35",
+            "LastServiceDate": "2023-07-08T01:01:11",
+            "BatteryStrings": 5,
+            "BatteryCabinetType": 114020002,
+            "ElectricAirFilterServiceDate": "2023-11-10T10:11:12",
+            "ERPContracts": [
+                {
+                    "ContractEndDate": "2019-10-20T00:00:01",
+                    "ContractStartDate": "2018-02-20T00:00:01",
+                    "PredictPulseContractType": "Plus 3"
+                }
+            ],
+            "CreationDate": "2024-02-25T00:13:04",
+            "CreatedBy": 3778,
+            "LastUpdateDate": "2024-02-25T00:13:04",
+            "LastUpdatedBy": 3778,
+            "Status": "PENDING",
+            "RecordId": 884879800,
+            "RequestId": "1311407584"
+        },
+        {
+            "SerialNumber": "Auto_15",
+            "Current": 1,
+            "SystemModstamp": "2023-02-02T16:35:59.000+0000",
+            "BatteryJarsPerTray": 4,
+            "BatteryTraysPerString": 3,
+            "BatteryMonitoring": 114020006,
+            "NumberOfCabinets": 2,
+            "ElectricRoomCleanliness": 9,
+            "Upm2FanServiceDate": "2011-04-22T09:52:36",
+            "Upm3FanServiceDate": "2010-10-15T09:53:36",
+            "Upm4FanServiceDate": "2023-01-18T09:54:36",
+            "LastServiceDate": "2023-02-10T01:01:12",
+            "BatteryStrings": 3,
+            "BatteryCabinetType": 114020003,
+            "ElectricAirFilterServiceDate": "2023-10-04T13:14:15",
+            "ERPContracts": [
+                {
+                    "ContractEndDate": "2019-03-21T00:00:02",
+                    "ContractStartDate": "2017-03-21T00:00:02",
+                    "PredictPulseContractType": "Advanced"
+                }
+            ],
+            "CreationDate": "2024-02-25T00:13:04",
+            "CreatedBy": 3778,
+            "LastUpdateDate": "2024-02-25T00:13:04",
+            "LastUpdatedBy": 3778,
+            "Status": "PENDING",
+            "RecordId": 884879800,
+            "RequestId": "1443874284"
+        }
+    ]
+}
