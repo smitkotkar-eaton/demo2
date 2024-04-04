@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - feature_3
+      - main
       # - feature1
         # - feature_2
           
@@ -13,7 +13,7 @@ on:
 
 jobs:
   build:
-    runs-on: label-1
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -27,37 +27,37 @@ jobs:
         run: python -c "import sys; print(sys.version)"
  
 
-  Test_with_Pytest:
-    runs-on: label-1
+  # Test_with_Pytest:
+  #   runs-on: ubuntu-latest
             
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-         python-version: '3.9'
+  #     - name: Set up Python
+  #       uses: actions/setup-python@v4
+  #       with:
+  #        python-version: '3.9'
           
-      - name: Display Python version
-        run: python -c "import sys; print(sys.version)"
+  #     - name: Display Python version
+  #       run: python -c "import sys; print(sys.version)"
         
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip setuptools wheel
-          pip install -r requirements.txt
+  #     - name: Install dependencies
+  #       run: |
+  #         python -m pip install --upgrade pip setuptools wheel
+  #         pip install -r requirements.txt
 
-      - name: Test with pytest
-        run: |
-          pip install pytest pytest-cov coverage
-          pytest test_func_app.py --doctest-modules --junitxml=junit/test-results-3.9.xml
+  #     - name: Test with pytest
+  #       run: |
+  #         pip install pytest pytest-cov coverage
+  #         pytest test_func_app.py --doctest-modules --junitxml=junit/test-results-3.9.xml
       
-      - name: Upload pytest test results
-        uses: actions/upload-artifact@v4
-        with:
-          name: pytest-results-3.9
-          path: junit/test-results-3.9.xml
-        if: ${{ always() }}
+  #     - name: Upload pytest test results
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: pytest-results-3.9
+  #         path: junit/test-results-3.9.xml
+  #       if: ${{ always() }}
         #Use always() to always run this step to publish test results when there are test failures
 
       # - name: Check coverage
