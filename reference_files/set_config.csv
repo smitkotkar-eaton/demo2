@@ -1,6 +1,0 @@
-name,value
-sql_pass,Password~1
-sql_user,PPadmin
-sql_url,"tcp:javelinqa.database.windows.net,1433;"
-sql_database1,Eaton_USA_QA
-sql_db,dbo

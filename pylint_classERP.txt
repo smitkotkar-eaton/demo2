@@ -1,9 +1,0 @@
-************* Module class_ERP
-src\class_ERP.py:1:0: C0103: Module name "class_ERP" doesn't conform to snake_case naming style (invalid-name)
-src\class_ERP.py:21:4: R0201: Method could be a function (no-self-use)
-src\class_ERP.py:97:4: E0213: Method should have "self" as first argument (no-self-argument)
-src\class_ERP.py:119:15: W0703: Catching too general exception Exception (broad-except)
-
-------------------------------------------------------------------
-Your code has been rated at 8.30/10 (previous run: 8.30/10, +0.00)
-
