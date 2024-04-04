@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - feature_3
+      - main
       # - feature1
         # - feature_2
           
