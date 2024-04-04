@@ -18,7 +18,7 @@ direct written permission from Eaton Corporation.
 import pandas as pd
 import numpy as np
 
-from utils import AppLogger
+from utils.logger import AppLogger
 logger = AppLogger(__name__)
 
 # %% *** Define Class ***
@@ -106,7 +106,8 @@ class Format:
                 df_data[col] = pd.to_numeric(df_data[col], errors='coerce')
 
                 if dict_val['data_type'] == 'numeric : integer':
-                    df_data[col] = df_data[col].fillna(-1).astype(int)
+                    # df_data[col] = df_data[col].fillna(-1).astype(int)
+                    df_data[col] = df_data[col].astype("Int64")
 
             else:
                 raise ValueError('Unknown format')
@@ -266,7 +267,7 @@ class Format:
                     form_ = 0
                 else:
                     form_ = form_.replace('numeric : ', '')
-                    form_ = pd.to_numeric(form_)
+                    form_ = pd.to_numeric(form_, errors='coerce')
                 df_out[col] = df_data[name_].round(decimals=form_)
             elif form_ == 'bool : 0/1':
                 df_out[col] = df_data[name_]

@@ -1,4 +1,3 @@
-
 """@file
 
 
@@ -17,23 +16,24 @@ direct written permission from Eaton Corporation.
 
 # %% *** Setup Environment ***
 
-from utils.class_iLead_contact import ilead_contact
 import logging
 import utils.io_adopter.local as io_local
 import pandas as pd
 from datetime import datetime
 from utils.io_adopter.class_adlsFunc import adlsFunc
-#from azure.storage.filedatalake import DataLakeServiceClient
 from utils import AppLogger
 import re
+
 logger = AppLogger(__name__)
 
 # %% Define class
 io_adls = adlsFunc()
+
+
 class IO():
 
     @staticmethod
-    def read_adls(config) -> pd.DataFrame:
+    def read_adls(config, column_data_types) -> pd.DataFrame:
         """
         :input: configuration of ADLS (json)
         Method to read files from adls container
@@ -51,8 +51,8 @@ class IO():
         storage_account_name_key = config['adls_config']['storage_account_name']
         try:
             logger.app_info('IO: read_csv_adls: Reading credentials')
-            credentials=io_adls.read_credentials(ls_cred=[connection_string_key,storage_account_name_key])
-            
+            credentials = io_adls.read_credentials(ls_cred=[connection_string_key, storage_account_name_key])
+
             formatted_connection_string_key = connection_string_key.replace('-', '_')
             # Accessing values from the credentials dictionary
             connection_string = credentials.get(formatted_connection_string_key)
@@ -64,13 +64,14 @@ class IO():
             else:
                 file_name = io_adls.list_ADLS_directory_contents(connection_string, container_name, directory_name)
                 logger.app_info(f"IO: read_csv_adls: File name from list: {file_name}")
-         
+
             if 'sep' in list(config.keys()):
                 sep = config['sep']
             else:
                 sep = ','
 
-            result= io_adls.input_file_read(connection_string, container_name, file_name, directory_name=directory_name, sep=sep)
+            result = io_adls.input_file_read(connection_string, container_name, file_name, column_data_types,
+                                             directory_name=directory_name, sep=sep)
             logger.app_info(f"IO: read_csv_adls: Type: {type(result)}, Shape: {result.shape}")
 
             return result
@@ -79,7 +80,7 @@ class IO():
             return e
 
     @staticmethod
-    def write_adls(config,dataset):
+    def write_adls(config, dataset):
         """
         :input: configuration of ADLS (json)
         Method to write files into adls container
@@ -97,45 +98,50 @@ class IO():
         connection_string_key = config['adls_config']['connection_string']
         storage_account_name_key = config['adls_config']['storage_account_name']
         try:
-            escape_char_for_services = ""
-            credentials=io_adls.read_credentials(ls_cred=[connection_string_key,storage_account_name_key])
+            credentials = io_adls.read_credentials(ls_cred=[connection_string_key, storage_account_name_key])
             formatted_connection_string_key = connection_string_key.replace('-', '_')
             # Accessing values from the credentials dictionary
             connection_string = credentials.get(formatted_connection_string_key)
-            output_container_name=config['adls_dir']['container_name']
-            output_directory_name= config['adls_dir']['directory_name']
-            if "services" in output_directory_name:
-                escape_char_for_services = "services"
+            output_container_name = config['adls_dir']['container_name']
+            output_directory_name = config['adls_dir']['directory_name']
 
+            # setting the default format for writing a file on ADLS to csv.
+            # Additional formats can be handled by writing if-else statements and sending file format paramter.
+            file_format = 'csv'
             if 'file_name' in config['adls_dir'] and config['adls_dir']['file_name'] != "":
-                file_name= config['adls_dir']['file_name']
+                file_name = config['adls_dir']['file_name']
+                if file_name.endswith(".json"):
+                    file_format = 'json'
+                    file_name = file_name[:-5]
                 if file_name.endswith(".csv"):
                     file_name = file_name[:-4]
 
             else:
-                 file_name = io_adls.list_ADLS_directory_contents(connection_string, output_container_name,output_directory_name)
-                 
+                file_name = io_adls.list_ADLS_directory_contents(connection_string, output_container_name,
+                                                                 output_directory_name)
+
             file_name = file_name.split('.')[0]
-            logger.app_info(f'IO: write_csv_adls: Filename: {file_name}')
+            logger.app_info(f'IO: write_{file_format}_adls: Filename: {file_name}')
             output_file_name = f"{file_name}"
 
-            result= io_adls.output_file_write(connection_string, dataset, output_container_name,output_file_name, output_directory_name, escape_char_for_services)
+            result = io_adls.output_file_write(connection_string, dataset, output_container_name, output_file_name,
+                                               file_format, output_directory_name)
             return result
         except Exception as e:
             return e
 
     # *** CSV ***
     @staticmethod
-    def read_csv(mode, config) -> pd.DataFrame:
+    def read_csv(mode, config, column_data_types=None) -> pd.DataFrame:
 
         if mode == 'local':
-            return io_local.read_csv_local(config)
-        elif mode == 'azure-adls':
+            return io_local.read_csv_local(config, column_data_types)
+        elif mode == 'azure':
             logger.app_info(f'IO: read_csv: Mode {mode}')
-            return IO.read_adls(config)
+            return IO.read_adls(config, column_data_types)
         else:
             logger.app_info(f'IO: read_csv: Mode {mode} is not implemented')
-            raise ValueError ('Not implemented or unknow mode')
+            raise ValueError('Not implemented or unknown mode')
 
     @staticmethod
     def write_csv(mode, config, data):
@@ -143,12 +149,24 @@ class IO():
 
         if mode == 'local':
             return io_local.write_csv_local(config, data)
-        elif mode == 'azure-adls':
+        elif mode == 'azure':
             logger.app_info(f'IO: write_csv: Shape of data: {data.shape}')
-            return IO.write_adls(config,data)
+            return IO.write_adls(config, data)
         else:
             logger.app_info(f'IO: write_csv: Mode {mode} is not implemented')
-            raise ValueError ('Not implemented or unknow mode')
+            raise ValueError('Not implemented or unknown mode')
+
+    @staticmethod
+    def write_json(mode, config, data):
+        logger.app_info('IO: write_json: Starting write_json')
+
+        if mode == 'local':
+            return io_local.write_json_local(config, data)
+        elif mode == 'azure':
+            return IO.write_adls(config, data)
+        else:
+            logger.app_info(f'IO: write_csv: Mode {mode} is not implemented')
+            raise ValueError('Not implemented or unknown mode')
 
     # *** JSON ***
     # @staticmethod
@@ -158,8 +176,6 @@ class IO():
             return io_local.read_json_local(config)
         else:
             logger.app_info(f'Mode {mode} is not implemented')
-            raise ValueError ('Not implemented or unknow mode')
+            raise ValueError('Not implemented or unknow mode')
 
-
-
-#%%
+# %%

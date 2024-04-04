@@ -1,0 +1,10 @@
+SerialNumber,ContractStartDate,ContractEndDate,PredictPulseContractType,BatteryJarsPerTray,BatteryTraysPerString,BatteryMonitoring,NumberOfCabinets,ElecRooClean,Upm2FanServDate,Upm3FanServDate,Upm4FanServDate,LastServiceDate,BattStrings,BatteryCabinetType,ElecAirFilter,BattLastExchgDate,BatteryDateCode,BatteryInstallDate,BattMfdDate,FanServDate,FanServDateElec,Upm1FanServDate,AcCapServDate,DcCapServDate,Model,CtoNumber,BatteryModel,BatteryMfr,BatteryType,BatteryQuantity,SiteName,AddressLine1,City,State,Country,Zip,InstalledDate,WarrantyEndDate
+er364fbb25,,2021-01-01,,,100,BLANK,0,121,BLANK,2012-01-01,,,,,,,,,,,,,,,,,,,,,,addr11,BLANK,state1,,,,
+er153fbb01,,2021-01-02,,,200,BLANK,0,131,BLANK,2012-01-02,,,,,,,,,,,,,,,,,,,,,,addr12,BLANK,state2,,,,
+eq512fbb01,,2021-01-03,,,300,BLANK,0,141,BLANK,2012-01-03,,,,,,,,,,,,,,,,,,,,,,addr13,BLANK,state3,,,,
+eq364fbb08,,2021-01-04,,,400,BLANK,0,151,BLANK,2012-01-04,,,,,,,,,,,,,,,,,,,,,,addr14,BLANK,state4,,,,
+bf215fbb05,,2021-01-05,,,500,BLANK,0,161,BLANK,2012-01-05,,,,,,,,,,,,,,,,,,,,,,addr15,BLANK,state5,,,,
+a2b2c2d2e,2001-11-09,2012-01-08,basic 88,8,8,,0,199,,2011-01-05,,,,,,2017-08-31,2017-08-31,2017-08-31,,1985-04-21,1985-04-21,1985-04-21,1985-04-21,1985-04-21,,,,,,,site88,addr88,,state88,,,,2023-11-01
+f1g2h2i2j,2001-04-09,2012-01-09,basic 99,9,9,,0,299,,2011-05-06,,,,,,2016-08-28,2016-08-28,2016-08-28,,1976-03-16,1976-03-16,1976-03-16,1976-03-16,1976-03-16,,,,,,,site99,addr99,,state99,,55555,2022-12-02,
+aaaaaaaa,BLANK,BLANK,BLANK,BLANK,BLANK,BLANK,0,BLANK,BLANK,BLANK,BLANK,BLANK,0,BLANK,BLANK,BLANK,BLANK,BLANK,BLANK,BLANK,BLANK,BLANK,BLANK,BLANK,BLANK,BLANK,BLANK,BLANK,BLANK,0,BLANK,BLANK,BLANK,BLANK,BLANK,BLANK,BLANK,BLANK
+bbbbbbbb,BLANK,BLANK,BLANK,BLANK,BLANK,BLANK,0,BLANK,BLANK,BLANK,BLANK,BLANK,0,BLANK,BLANK,BLANK,BLANK,BLANK,BLANK,BLANK,BLANK,BLANK,BLANK,BLANK,BLANK,BLANK,BLANK,BLANK,BLANK,0,BLANK,BLANK,BLANK,BLANK,BLANK,BLANK,BLANK,BLANK

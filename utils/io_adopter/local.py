@@ -51,7 +51,7 @@ def read_json_local(config):
 
 
 #  *** CSV ***
-def read_csv_local(config):
+def read_csv_local(config, column_data_types):
     """
     Method to read csv file from local machine
     @param config: config contains location of the file, filename and encoding
@@ -70,7 +70,7 @@ def read_csv_local(config):
 
     try:
         file_path = os.path.join(file_dir, file_name)
-        data = pd.read_csv(file_path, sep=sep, encoding=encoding)
+        data = pd.read_csv(file_path, dtype=column_data_types, sep=sep, encoding=encoding)
 
         logger.app_debug(f"{_step}: SUCCEED", 1)
         return data
@@ -93,6 +93,30 @@ def write_csv_local(config, data):
     try:
         file_path = os.path.join(file_dir, file_name)
         data.to_csv(file_path, index=False)
+
+        logger.app_debug(f"{_step}: SUCCEED", 1)
+        return 'successful !'
+
+    except Exception as e:
+        logger.app_fail(_step, f"{traceback.print_exc()}")
+        raise Exception from e
+
+
+def write_json_local(config, data):
+    _step = f'Write json : {config}'
+
+    try:
+        file_name = config['file_name']
+        file_dir = config['file_dir']
+    except Exception as e:
+        logger.app_fail("Required config not provided", 1)
+        raise ValueError from e
+
+    try:
+        file_path = os.path.join(file_dir, file_name)
+        json_object = json.dumps(data, indent=4)
+        with open(file_path, 'w') as f:
+            f.write(json_object)
 
         logger.app_debug(f"{_step}: SUCCEED", 1)
         return 'successful !'

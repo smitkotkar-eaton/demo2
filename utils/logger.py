@@ -18,7 +18,7 @@ import logging
 class AppLogger():
     """ Logging Class."""
 
-    def __init__(self, app_name="CapEoUL", mode=0, level='Info'):
+    def __init__(self, app_name="iLeads-BLSSRM", mode=0, level='Info'):
         """
 
 

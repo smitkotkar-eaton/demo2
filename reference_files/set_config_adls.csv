@@ -1,0 +1,8 @@
+name,value
+adlsconnectionstring,DefaultEndpointsProtocol=https;AccountName=adlsjavelinstorageactdev;AccountKey=2XGzyIFXZOcZR/baKTT83fT0spuNRSqQR+SOkLdchgxYjTcVz6rjyTMyyu/b5iC6DoLsNh+0TZjphKjuqPDQzQ==;EndpointSuffix=core.windows.net
+storageaccountname,adlsjavelinstorageactdev
+erp-url-qa,https://javelinerpsyncqa.azurewebsites.net/api/SyncData
+func-key-qa,Pi3rnPNDdowETYavf6r80L/51yEQ0ktgCKxE8Ff2KLhWSAMxYS0NlQ==
+erp-url-dev,https://javelinerpsyncdev.azurewebsites.net/api/SyncData
+func-key-dev,As5WZ7mPi8ODZHdXU/cKT5MqX1askKUeCLd7YmwKuG1sDflLJDjhTg==
+func-key-qa-old,SNb6atfR9kEiEWVlVXmafiq3Vqjy7DjhaBUVJMVWH71f2CVdVudjPQ==

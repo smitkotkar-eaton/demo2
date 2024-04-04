@@ -1,2 +1,0 @@
-Job_Index,Total_Quantity,Component,Component_Description,key,End of Prod,Status,Life__Years,EOSL,flag_raise_in_gp,SerialNumber_M2M,Product_M2M_Org,InstallDate,key_value,lead_match,lead_id_basedon,flag_update_sts_leads,temp_column,component,ClosedDate,date_code,source,today,age,lead_type
-123,34,Display,abc,pdu,abc,Active,20,abc,True,123-3210,pdu,2018-01-01,pdu,exact,Product_M2M,False,display,display,2050-02-11,2050-02-11 00:00:00,Services,2023-12-07 12:50:46.553277,-26,EOSL

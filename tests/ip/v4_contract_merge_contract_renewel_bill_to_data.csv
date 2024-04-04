@@ -1,4 +1,0 @@
-ContractNumber,PDI_ContractType,Service_Plan,Contract,Contract_Sales_Order__c,Original_Sales_Order__c,BillingCustomer_old,BillingAddress_old,BillingCity_old,BillingState_old,BillingPostalCode_old,BillingCountry_old,Contract_Start_Date,Contract_Status__c,IsDeleted,key_contract,key_SO,BillingCustomer,BillingAddress,BillingCity,BillingState,BillingPostalCode,BillingCountry
-6827,new,gold,80046000000cfVRAAY,1,2,0,1,2,3,4,5,2024-01-17 12:47:42.365993,closed,False,1,1,a,b,c,d,e,f
-7783,new,extended warranty,80046000000cfVLAAY,,2,Only Customer,6,7,8,9,10,2024-01-17 12:47:42.365993,closed,False,2,2,Only Customer,g,h,i,j,10
-6539,existing,silver,80046000000cfUIAAY,3,4,1,7,8,9,10,11,2024-01-17 12:47:42.365993,,,3,,1,7,8,9,10,11

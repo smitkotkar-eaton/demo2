@@ -1,0 +1,917 @@
+{
+    "KEY_VAULT": "https://ileadkeyvault.vault.azure.net/",
+    "mode": "local",
+    "mode_options" :["local",
+        "azure"
+    ],
+    "wait_time_in_secs": 3,
+    "wait_time_in_secs_for_batches": 10,
+    "number_of_attempts": 3,
+    "token_message": "token not received",
+    "success_status_code": ["200"],
+    "st_code":"900",
+    "status_code_and_content" :{
+        "200" : "API call succeeded.",
+        "201" : "API call succeeded. Data was saved in the database.",
+        "400" : "Invalid request body/ BAD request. This is an issue from CIP side since, few fields which were supposed to be present in the request body are not found/are missing. ",
+        "401" : "This is an issue from CIP side since, where the credentials used/provided in the post request are not legitimate. Authentication has failed.",
+        "403" : "Access has been forbidden. There seems to be an issue at API side since, where the server understood the request but refused to authorize it.",
+        "500" : "There seems to be an issue at API side. The server was not able to process the request received due to Internal Server Error.",
+        "502" : "There seems to be an issue at API side. One potential issue can be due to the gateway.",
+        "503" : "There seems to be an issue at API side. The service is found to be unavailable.",
+        "504" : "The data being pushed is resulting into a Gateway-Time out. This is an issue from API side."
+    },
+    "connection_time_out_in_secs": 40,
+    "response_time_out_in_secs": 40,
+    "attempts_for_token": 3,
+    "batch_size": 200,
+    "creds_type": "Basic",
+    "header_config": {
+        "Accept": "application/json",
+        "Cache-control": "no-cache",
+        "Content-type": "application/x-www-form-urlencoded"
+    },
+    "payload": {
+        "grant_type": "client_credentials",
+        "scope": "client_cred"
+    },
+    "RECORD_ID":"ILeadSyncAPI",
+    "STATUS": "PENDING",
+    "RGE_REQ_ID" :[10000, 2147483647],
+    "DICT_FORM_MANDATE" :{
+    "CreationDate": "%Y-%m-%dT%H:%M:%S",
+    "LastUpdateDate": "%Y-%m-%dT%H:%M:%S",
+    "RequestId": "str"
+    },
+
+    "required_columns": ["SerialNumber", "ContractStartDate", "ContractEndDate", "PredictPulseContractType", "BatteryJarsPerTray", "BatteryTraysPerString", "BatteryMonitoring", "NumberOfCabinets", "ElecRooClean", "Upm2FanServDate", "Upm3FanServDate", "Upm4FanServDate", "LastServiceDate", "BattStrings", "BatteryCabinetType", "ElecAirFilter", "BattLastExchgDate", "BatteryDateCode", "BatteryInstallDate", "BattMfdDate", "FanServDate", "FanServDateElec", "Upm1FanServDate", "AcCapServDate", "DcCapServDate", "Model", "CtoNumber", "BatteryModel", "BatteryMfr", "BatteryType", "BatteryQuantity", "SiteName", "AddressLine1", "City", "State", "Country", "Zip", "InstalledDate", "WarrantyEndDate"],
+
+    "column_order": ["ContractStartDate", "ContractEndDate", "PredictPulseContractType", "BatteryJarsPerTray", "BatteryTraysPerString", "BatteryMonitoring", "NumberOfCabinets", "ElecRooClean", "Upm2FanServDate", "Upm3FanServDate", "Upm4FanServDate", "LastServiceDate", "BattStrings", "BatteryCabinetType", "ElecAirFilter", "BattLastExchgDate", "BatteryDateCode", "BatteryInstallDate", "BattMfdDate", "FanServDate", "FanServDateElec", "Upm1FanServDate", "AcCapServDate", "DcCapServDate", "Model", "CtoNumber", "BatteryModel", "BatteryMfr", "BatteryType", "BatteryQuantity", "SiteName", "AddressLine1", "City", "State", "Country", "Zip", "InstalledDate", "WarrantyEndDate"],
+
+    "columns_to_drop": ["ContractStartDate","ContractEndDate","PredictPulseContractType"],
+    "columns_for_tracking_batches": ["BatchNo", "start_index", "end_index",
+                                     "BatchSize", "StatusCode", "DF_size_in_KB", "JSON_size_in_KB", "RequestId"],
+
+    "integer_type_columns" : ["BattStrings", "NumberOfCabinets", "BatteryQuantity"],
+
+    "config_sets" : {
+            "ERPContracts": ["list",
+                            ["ContractEndDate", "ContractStartDate", "PredictPulseContractType"]]
+        },
+    "file": {
+        "dir_ref": "./references/",
+        "dir_data": "./data/",
+        "dir_results": "./results/",
+        "Raw": {
+            "ilead_output": {
+                "file_name": "output_iLead.csv"
+            },
+            "assets_data": {
+                "file_name": "assets_data.csv"
+            }
+
+        },
+        "Reference": {
+        },
+        "Processed": {
+            "processed_assets": {
+                "file_name": "merged_asset_ilead.csv"
+            },
+            "processed_delta_csv": {
+                "file_name": "processed_assets.csv"
+            },
+            "processed_delta_json": {
+                "file_name": "blssrm_delta_data.json"
+            },
+            "batch_status_df": {
+                "file_name": "status_for_batches"
+            }
+        }
+    },
+    "adls": {
+        "Raw": {
+            "adls_credentials": {
+                "connection_string": "adlsconnectionstring",
+                "storage_account_name": "storageaccountname"
+            },
+            "ilead_output": {
+                "container_name": "reports",
+                "directory_name": "",
+                "file_name": "output_iLead.csv"
+            },
+			"assets_data": {
+                "container_name": "reports",
+                "directory_name": "",
+                "file_name": "assets_data.csv"
+            }
+        },
+        "Reference": {
+            "adls_credentials": {
+                "connection_string": "",
+                "storage_account_name": ""
+            }
+
+        },
+        "Processed": {
+            "adls_credentials": {
+                "connection_string": "adlsconnectionstring",
+                "storage_account_name": "storageaccountname"
+            },
+            "processed_assets": {
+                "container_name": "ileads-blssrm-erp",
+                "directory_name": "",
+                "file_name": "merged_asset_ilead.csv"
+            },
+            "processed_delta_csv": {
+                "container_name": "ileads-blssrm-erp",
+                "directory_name": "",
+                "file_name": "processed_assets.csv"
+            },
+            "processed_delta_json": {
+                "container_name": "ileads-blssrm-erp",
+                "directory_name": "",
+                "file_name": "blssrm_delta_data.json"
+            },
+            "batch_status_df": {
+                "container_name": "ileads-blssrm-erp",
+                "directory_name": "",
+                "file_name": "status_for_batches"
+            }
+        }
+    },
+    "database" : {
+        "assets": {
+            "Dictionary Format": {
+                "SerialNumber": {
+                    "actual_datasoure_name": "XML_SerialNumber__c",
+                    "data_type": "text",
+                    "is_nullable":1.0,
+                    "output_format": "text",
+                    "input_date_format": ""
+                },
+                "ContractStartDate": {
+                    "actual_datasoure_name": "Contract_Start_Date__c",
+                    "data_type": "date",
+                    "is_nullable": 1.0,
+                    "output_format": "date : yyyy-mm-dd",
+                    "input_date_format": ""
+                },
+                "ContractEndDate": {
+                    "actual_datasoure_name": "Contract_End_Date__c",
+                    "data_type": "date",
+                    "is_nullable": 1.0,
+                    "output_format": "date : yyyy-mm-dd",
+                    "input_date_format": ""
+                },
+                "PredictPulseContractType": {
+                    "actual_datasoure_name": "Predict_Pulse_Contract_Type__c",
+                    "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "",
+                    "input_date_format": ""
+                },
+                "Current": {
+                    "actual_datasoure_name": "Current__c",
+                    "data_type": "numeric",
+                    "is_nullable":1.0 ,
+                    "output_format": "numeric",
+                    "input_date_format": ""
+                },
+                "SystemModStamp": {
+                    "actual_datasoure_name": "SystemModstamp",
+                    "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "",
+                    "input_date_format": ""
+                },
+                "BatteryJarsPerTray+": {
+                "actual_datasoure_name": "Battery_Jars_Per_Tray__c",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "",
+                    "input_date_format": ""
+                },
+                "BatteryTraysPerString+": {
+                "actual_datasoure_name": "Battery_Trays_Per_String__c",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "",
+                    "input_date_format": ""
+                },
+                "BatteryMonitoring+": {
+                "actual_datasoure_name": "Battery_Monitoring__c",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "",
+                    "input_date_format": ""
+                },
+                "NumberOfCabinets+": {
+                "actual_datasoure_name": "Number_Of_Cabinets__c",
+                "data_type": "numeric : integer",
+                    "is_nullable":1.0 ,
+                    "output_format": "",
+                    "input_date_format": ""
+                 },
+                "ElectricRoomCleanliness+": {
+                "actual_datasoure_name": "Electric_Room_Cleanliness__c",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "",
+                    "input_date_format": ""
+                },
+                "Upm2FanServiceDate+": {
+                "actual_datasoure_name": "Upm2_Fan_Service_Date__c",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "date : yyyy-mm-dd",
+                    "input_date_format": ""
+                },
+                "Upm3FanServiceDate+": {
+                "actual_datasoure_name": "Upm3_Fan_Service_Date__c",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "date : yyyy-mm-dd",
+                    "input_date_format": ""
+                 },
+            "Upm4FanServiceDate+": {
+                "actual_datasoure_name": "Upm4_Fan_Service_Date__c",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "date : yyyy-mm-dd",
+                    "input_date_format": ""
+            },
+            "LastServiceDate": {
+                "actual_datasoure_name": "Last_Service_Date__c",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "date : yyyy-mm-dd",
+                    "input_date_format": ""
+            },
+            "BatteryStrings+": {
+                "actual_datasoure_name": "Battery_Strings__c",
+                "data_type": "numeric : integer",
+                    "is_nullable":1.0 ,
+                    "output_format": "",
+                    "input_date_format": ""
+            },
+            "BatteryCabinetType+": {
+                "actual_datasoure_name": "Battery_Cabinet_Type__c",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "",
+                    "input_date_format": ""
+            },
+            "ElectricAirFilterServiceDate+": {
+                "actual_datasoure_name": "Electric_Air_Filter_Service_Date__c",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "date : yyyy-mm-dd",
+                    "input_date_format": ""
+            }
+          }
+        },
+        "output_ilead": {
+            "Dictionary Format": {
+                "SerialNumber": {
+                    "actual_datasoure_name": "SerialNumber",
+                    "data_type": "text",
+                    "is_nullable":1.0,
+                    "output_format": "text",
+                    "input_date_format": ""
+                },
+                "Model": {
+                    "actual_datasoure_name": "Model_Id_Short",
+                    "data_type": "text",
+                    "is_nullable": 1.0,
+                    "output_format": "text",
+                    "input_date_format": ""
+                },
+                "Component": {
+                    "actual_datasoure_name": "Component",
+                    "data_type": "text",
+                    "is_nullable": 1.0,
+                    "output_format": "text",
+                    "input_date_format": ""
+                },
+                "CTONumber": {
+                    "actual_datasoure_name": "Item/CTO",
+                    "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "text",
+                    "input_date_format": ""
+                },
+                "BatteryModel+": {
+                    "actual_datasoure_name": "BatteryModel",
+                    "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "text",
+                    "input_date_format": ""
+                },
+                "BatteryManufacturer+": {
+                    "actual_datasoure_name": "BatteryMfg",
+                    "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "text",
+                    "input_date_format": ""
+                },
+                "BatteryType+": {
+                "actual_datasoure_name": "BatteryTypeData",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "text",
+                    "input_date_format": ""
+                },
+                "BatteryQuantity+": {
+                "actual_datasoure_name": "Num_of_Jars",
+                "data_type": "numeric : integer",
+                    "is_nullable":1.0 ,
+                    "output_format": "",
+                    "input_date_format": ""
+                },
+                "SiteName": {
+                "actual_datasoure_name": "Current_Location_Party_Name",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "text",
+                    "input_date_format": ""
+                },
+                "Device Address": {
+                "actual_datasoure_name": "Current_Location_Address1",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "text",
+                    "input_date_format": ""
+                 },
+                "Device City": {
+                "actual_datasoure_name": "Current_Location_City",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "text",
+                    "input_date_format": ""
+                },
+                "Device State": {
+                "actual_datasoure_name": "Current_Location_State",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "text",
+                    "input_date_format": ""
+                },
+                "Device Country": {
+                "actual_datasoure_name": "Current_Location_Country",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "text",
+                    "input_date_format": ""
+                },
+                "Device Postal Code +": {
+                "actual_datasoure_name": "Current_Location_Postal_Code",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "text",
+                    "input_date_format": ""
+                },
+                "BatteryLastExchangeDate": {
+                "actual_datasoure_name": "BatteryDateCode",
+                "data_type": "date",
+                    "is_nullable": 1.0,
+                    "output_format": "date : yyyy-mm-dd",
+                    "input_date_format": ""
+                },
+                "BatteryDateCode": {
+                "actual_datasoure_name": "BatteryDateCode_1",
+                "data_type": "date",
+                    "is_nullable": 1.0,
+                    "output_format": "date : yyyy-mm-dd",
+                    "input_date_format": ""
+                },
+                "BatteryInstalledDate": {
+                "actual_datasoure_name": "BatteryDateCode_2",
+                "data_type": "date",
+                    "is_nullable": 1.0,
+                    "output_format": "date : yyyy-mm-dd",
+                    "input_date_format": ""
+                },
+                "BatteryManufactureDate": {
+                "actual_datasoure_name": "BatteryDateCode_3",
+                "data_type": "date",
+                    "is_nullable": 1.0,
+                    "output_format": "date : yyyy-mm-dd",
+                    "input_date_format": ""
+                },
+                "FanServiceDate": {
+                "actual_datasoure_name": "FanServDateCode",
+                "data_type": "date",
+                    "is_nullable": 1.0,
+                    "output_format": "date : yyyy-mm-dd",
+                    "input_date_format": ""
+                },
+                "ElectricFanServiceDate": {
+                "actual_datasoure_name": "FanServDateCode_1",
+                "data_type": "date",
+                    "is_nullable": 1.0,
+                    "output_format": "date : yyyy-mm-dd",
+                    "input_date_format": ""
+                },
+                "Upm1FanServiceDate": {
+                "actual_datasoure_name": "FanServDateCode_2",
+                "data_type": "date",
+                    "is_nullable": 1.0,
+                    "output_format": "date : yyyy-mm-dd",
+                    "input_date_format": ""
+                },
+                "AcCapacitorServiceDate": {
+                "actual_datasoure_name": "CapServDateCode",
+                "data_type": "date",
+                    "is_nullable": 1.0,
+                    "output_format": "date : yyyy-mm-dd",
+                    "input_date_format": ""
+                },
+                "DcCapacitorServiceDate": {
+                "actual_datasoure_name": "CapServDateCode_1",
+                "data_type": "date",
+                    "is_nullable": 1.0,
+                    "output_format": "date : yyyy-mm-dd",
+                    "input_date_format": ""
+                },
+                "DeviceInstalledDate": {
+                "actual_datasoure_name": "InstallDate",
+                "data_type": "date",
+                    "is_nullable": 1.0,
+                    "output_format": "date : yyyy-mm-dd",
+                    "input_date_format": ""
+                },
+                "WarrantyEndDate": {
+                "actual_datasoure_name": "Warranty_End",
+                "data_type": "date",
+                    "is_nullable": 1.0,
+                    "output_format": "date : yyyy-mm-dd",
+                    "input_date_format": ""
+                }
+            }
+        }
+    },
+    "processed_assets": {
+        "Dictionary Format": {
+            "SerialNumber": {
+                "actual_datasoure_name": "SerialNumber",
+                "data_type": "text",
+                "is_nullable":1.0,
+                "output_format": "text",
+                "input_date_format": ""
+            },
+            "ContractStartDate": {
+                "actual_datasoure_name": "ContractStartDate",
+                "data_type": "text",
+                "is_nullable": 1.0,
+                "output_format": "date : yyyy-mm-dd",
+                "input_date_format": ""
+            },
+            "ContractEndDate": {
+                "actual_datasoure_name": "ContractEndDate",
+                "data_type": "text",
+                "is_nullable": 1.0,
+                "output_format": "date : yyyy-mm-dd",
+                "input_date_format": ""
+            },
+            "PredictPulseContractType": {
+                "actual_datasoure_name": "PredictPulseContractType",
+                "data_type": "text",
+                "is_nullable":1.0 ,
+                "output_format": "",
+                "input_date_format": ""
+            },
+            "BatteryJarsPerTray": {
+                "actual_datasoure_name": "BatteryJarsPerTray",
+                "data_type": "text",
+                "is_nullable":1.0 ,
+                "output_format": "",
+                "input_date_format": ""
+            },
+            "BatteryTraysPerString": {
+                "actual_datasoure_name": "BatteryTraysPerString",
+                "data_type": "text",
+                "is_nullable":1.0 ,
+                "output_format": "",
+                "input_date_format": ""
+            },
+            "BatteryMonitoring": {
+                "actual_datasoure_name": "BatteryMonitoring",
+                "data_type": "text",
+                "is_nullable":1.0 ,
+                "output_format": "",
+                "input_date_format": ""
+            },
+            "NumberOfCabinets": {
+                "actual_datasoure_name": "NumberOfCabinets",
+                "data_type": "numeric : integer",
+                "is_nullable":1.0 ,
+                "output_format": "",
+                "input_date_format": ""
+             },
+            "ElecRooClean": {
+                "actual_datasoure_name": "ElecRooClean",
+                "data_type": "text",
+                "is_nullable":1.0 ,
+                "output_format": "",
+                "input_date_format": ""
+            },
+            "Upm2FanServDate": {
+                "actual_datasoure_name": "Upm2FanServDate",
+                "data_type": "text",
+                "is_nullable":1.0 ,
+                "output_format": "date : yyyy-mm-dd",
+                "input_date_format": ""
+            },
+            "Upm3FanServDate": {
+                "actual_datasoure_name": "Upm3FanServDate",
+                "data_type": "text",
+                "is_nullable":1.0 ,
+                "output_format": "date : yyyy-mm-dd",
+                "input_date_format": ""
+             },
+            "Upm4FanServDate": {
+                "actual_datasoure_name": "Upm4FanServDate",
+                "data_type": "text",
+                "is_nullable":1.0 ,
+                "output_format": "date : yyyy-mm-dd",
+                "input_date_format": ""
+            },
+            "LastServiceDate": {
+                    "actual_datasoure_name": "LastServiceDate",
+                    "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "date : yyyy-mm-dd",
+                    "input_date_format": ""
+            },
+            "BattStrings": {
+                    "actual_datasoure_name": "BattStrings",
+                    "data_type": "numeric : integer",
+                    "is_nullable":1.0 ,
+                    "output_format": "",
+                    "input_date_format": ""
+            },
+            "BatteryCabinetType": {
+                    "actual_datasoure_name": "BatteryCabinetType",
+                    "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "",
+                    "input_date_format": ""
+            },
+            "ElecAirFilter": {
+                "actual_datasoure_name": "ElecAirFilter",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "date : yyyy-mm-dd",
+                    "input_date_format": ""
+            },
+            "BattLastExchgDate":{
+                    "actual_datasoure_name": "BattLastExchgDate",
+                    "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "date : yyyy-mm-dd",
+                    "input_date_format": ""
+            },
+            "BatteryDateCode":{
+                "actual_datasoure_name": "BatteryDateCode",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "date : yyyy-mm-dd",
+                    "input_date_format": ""
+            },
+            "BatteryInstallDate":{
+                "actual_datasoure_name": "BatteryInstallDate",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "date : yyyy-mm-dd",
+                    "input_date_format": ""
+            },
+            "BattMfdDate": {
+                "actual_datasoure_name": "BattMfdDate",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "date : yyyy-mm-dd",
+                    "input_date_format": ""
+            },
+            "FanServDate":{
+                "actual_datasoure_name": "FanServDate",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "date : yyyy-mm-dd",
+                    "input_date_format": ""
+            },
+            "FanServDateElec":{
+                "actual_datasoure_name": "FanServDateElec",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "date : yyyy-mm-dd",
+                    "input_date_format": ""
+            },
+            "Upm1FanServDate": {
+                "actual_datasoure_name": "Upm1FanServDate",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "date : yyyy-mm-dd",
+                    "input_date_format": ""
+            },
+            "AcCapServDate":{
+                "actual_datasoure_name": "AcCapServDate",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "date : yyyy-mm-dd",
+                    "input_date_format": ""
+            },
+            "DcCapServDate": {
+                "actual_datasoure_name": "DcCapServDate",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "date : yyyy-mm-dd",
+                    "input_date_format": ""
+            },
+            "Model": {
+                "actual_datasoure_name": "Model",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "",
+                    "input_date_format": ""
+            },
+            "CtoNumber": {
+                "actual_datasoure_name": "CtoNumber",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "",
+                    "input_date_format": ""
+            },
+            "BatteryModel": {
+                "actual_datasoure_name": "BatteryModel",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "",
+                    "input_date_format": ""
+            },
+            "BatteryMfr":{
+                "actual_datasoure_name": "BatteryMfr",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "",
+                    "input_date_format": ""
+            },
+            "BatteryType": {
+                "actual_datasoure_name": "BatteryType",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "",
+                    "input_date_format": ""
+            },
+            "BatteryQuantity":{
+                "actual_datasoure_name": "BatteryQuantity",
+                "data_type": "numeric : integer",
+                    "is_nullable":1.0 ,
+                    "output_format": "",
+                    "input_date_format": ""
+            },
+            "SiteName":{
+                "actual_datasoure_name": "SiteName",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "",
+                    "input_date_format": ""
+            },
+            "AddressLine1":{
+                "actual_datasoure_name": "AddressLine1",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "",
+                    "input_date_format": ""
+            },
+            "City":{
+                "actual_datasoure_name": "City",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "",
+                    "input_date_format": ""
+            },
+            "State":{
+                "actual_datasoure_name": "State",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "",
+                    "input_date_format": ""
+            },
+            "Country": {
+                "actual_datasoure_name": "Country",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "",
+                    "input_date_format": ""
+            },
+            "Zip":{
+                "actual_datasoure_name": "Zip",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "",
+                    "input_date_format": ""
+            },
+            "InstalledDate": {
+                "actual_datasoure_name": "InstalledDate",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "date : yyyy-mm-dd",
+                    "input_date_format": ""
+            },
+            "WarrantyEndDate": {
+                "actual_datasoure_name": "WarrantyEndDate",
+                "data_type": "text",
+                    "is_nullable":1.0 ,
+                    "output_format": "date : yyyy-mm-dd",
+                    "input_date_format": ""
+            }
+          }
+        },
+    "output_format": {
+        "assets_mapping": {
+            "SerialNumber": {
+                "actual_datasoure_name": "SerialNumber",
+                "output_format": ""
+            },
+            "ContractStartDate": {
+                "actual_datasoure_name": "ContractStartDate",
+                "output_format": "date : yyyy-mm-dd"
+            },
+            "ContractEndDate": {
+                "actual_datasoure_name": "ContractEndDate",
+                "output_format": "date : yyyy-mm-dd"
+            },
+            "PredictPulseContractType": {
+                "actual_datasoure_name": "PredictPulseContractType",
+                "output_format": ""
+            },
+            "BatteryJarsPerTray": {
+                "actual_datasoure_name": "BatteryJarsPerTray+",
+                "output_format": ""
+            },
+            "BatteryTraysPerString": {
+                "actual_datasoure_name": "BatteryTraysPerString+",
+                "output_format": ""
+            },
+            "BatteryMonitoring": {
+                "actual_datasoure_name": "BatteryMonitoring+",
+                "output_format": ""
+            },
+            "NumberOfCabinets": {
+                "actual_datasoure_name": "NumberOfCabinets+",
+                "output_format": "numeric : no_decimal"
+            },
+            "ElecRooClean": {
+                "actual_datasoure_name": "ElectricRoomCleanliness+",
+                "output_format": ""
+            },
+            "Upm2FanServDate": {
+                "actual_datasoure_name": "Upm2FanServiceDate+",
+                "output_format": "date : yyyy-mm-dd"
+            },
+            "Upm3FanServDate": {
+                "actual_datasoure_name": "Upm3FanServiceDate+",
+                "output_format": "date : yyyy-mm-dd"
+            },
+            "Upm4FanServDate": {
+                "actual_datasoure_name": "Upm4FanServiceDate+",
+                "output_format": "date : yyyy-mm-dd"
+            },
+            "LastServiceDate": {
+                "actual_datasoure_name": "LastServiceDate",
+                "output_format": "date : yyyy-mm-dd"
+            },
+            "BattStrings": {
+                "actual_datasoure_name": "BatteryStrings+",
+                "output_format": "numeric : no_decimal"
+            },
+            "BatteryCabinetType": {
+                "actual_datasoure_name": "BatteryCabinetType+",
+                "output_format": ""
+            },
+            "ElecAirFilter": {
+                "actual_datasoure_name": "ElectricAirFilterServiceDate+",
+                "output_format": "date : yyyy-mm-dd"
+            },
+            "BattLastExchgDate": {
+            "actual_datasoure_name": "BatteryLastExchangeDate",
+                "output_format": "date : yyyy-mm-dd"
+            },
+            "BatteryDateCode": {
+            "actual_datasoure_name": "BatteryDateCode",
+                "output_format": "date : yyyy-mm-dd"
+            },
+            "BatteryInstallDate": {
+            "actual_datasoure_name": "BatteryInstalledDate",
+                "output_format": "date : yyyy-mm-dd"
+            },
+            "BattMfdDate": {
+            "actual_datasoure_name": "BatteryManufactureDate",
+                "output_format": "date : yyyy-mm-dd"
+            },
+            "FanServDate": {
+            "actual_datasoure_name": "FanServiceDate",
+                "output_format": "date : yyyy-mm-dd"
+            },
+            "FanServDateElec": {
+            "actual_datasoure_name": "ElectricFanServiceDate",
+                "output_format": "date : yyyy-mm-dd"
+            },
+            "Upm1FanServDate": {
+            "actual_datasoure_name": "Upm1FanServiceDate",
+                "output_format": "date : yyyy-mm-dd"
+            },
+            "AcCapServDate": {
+            "actual_datasoure_name": "AcCapacitorServiceDate",
+                "output_format": "date : yyyy-mm-dd"
+            },
+            "DcCapServDate": {
+            "actual_datasoure_name": "DcCapacitorServiceDate",
+                "output_format": "date : yyyy-mm-dd"
+            },
+            "Model": {
+                "actual_datasoure_name": "Model",
+                "output_format": ""
+            },
+            "CtoNumber": {
+                "actual_datasoure_name": "CTONumber",
+                "output_format": ""
+            },
+            "BatteryModel": {
+                "actual_datasoure_name": "BatteryModel+",
+                "output_format": ""
+            },
+            "BatteryMfr": {
+                "actual_datasoure_name": "BatteryManufacturer+",
+                "output_format": ""
+            },
+            "BatteryType": {
+            "actual_datasoure_name": "BatteryType+",
+                "output_format": ""
+            },
+            "BatteryQuantity": {
+            "actual_datasoure_name": "BatteryQuantity+",
+                "output_format": "numeric : no_decimal"
+            },
+            "SiteName": {
+            "actual_datasoure_name": "SiteName",
+                "output_format": ""
+            },
+            "AddressLine1": {
+            "actual_datasoure_name": "Device Address",
+                "output_format": ""
+             },
+            "City": {
+            "actual_datasoure_name": "Device City",
+                "output_format": ""
+            },
+            "State": {
+            "actual_datasoure_name": "Device State",
+                "output_format": ""
+            },
+            "Country": {
+            "actual_datasoure_name": "Device Country",
+                "output_format": ""
+            },
+            "Zip": {
+            "actual_datasoure_name": "Device Postal Code +",
+                "output_format": ""
+            },
+            "InstalledDate": {
+            "actual_datasoure_name": "DeviceInstalledDate",
+                "output_format": "date : yyyy-mm-dd"
+            },
+            "WarrantyEndDate": {
+            "actual_datasoure_name": "WarrantyEndDate",
+                "output_format": "date : yyyy-mm-dd"
+            }
+
+        }
+    },
+    "date_columns": ["ContractStartDate","ContractEndDate","Upm2FanServiceDate","Upm3FanServiceDate","Upm4FanServiceDate","LastServiceDate","ElectricAirFilterServiceDate"],
+    "salesforce_contract": {
+        "trgt_cols": {
+            "contractnumber": "str",
+            "contractheaderstatus": "str",
+            "linestartdate": "str",
+            "lineenddate": "str",
+            "contractlinestatus": "str",
+            "material_number": "str",
+            "linedescription": "str",
+            "serialnumber": "str"
+        },
+        "map_cols": {
+            "contractnumber": "Contract Number",
+            "contractheaderstatus": "Contract Header Status",
+            "linestartdate": "Contract Header Start Date",
+            "lineenddate": "Contract Header End Date",
+            "contractlinestatus": "Contract Line Status",
+            "material_number": "Contract Coverage",
+            "linedescription": "Contract Coverage Description",
+            "serialnumber": "Serial Number"
+        },
+        "oracle_contract_fname": "oracle_contract.csv",
+        "salesforce_contract_fname": "salesforce_contract.csv",
+        "merged_contract_out_fname": "merged_raw_contracts.csv"
+    }
+}

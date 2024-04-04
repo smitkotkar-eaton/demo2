@@ -1,4 +1,0 @@
-Index,Product_M2M,PartNum_Comp,PartNumber_BOM_BOM,Match,Component,Component_Description,End of Prod,Status,Life__Years,EOSL,flag_raise_in_gp,Remark,MCCB or MCSW,Input CB,AMP Trip,kAIC @ Voltage,"Rated, Trip",kVA,MFR,drop,date_greater_than,change_component_to,change_status_to,change_life_years_to,change_eosl_to
-AB12,pdu,123-3210,123-3210,contains,Color Display,,,Active,10,,,,,,,,,,,,,,,,
-AB12,rpp,123-3211,123-3211,exact,Monochrome Display,,,Active,10,,,,,,,,,,,,,,,,
-AB12,sts,123-3212,123-3212,begins_with,8212 Display,,,Active,10,,,,,,,,,,,,,,,,

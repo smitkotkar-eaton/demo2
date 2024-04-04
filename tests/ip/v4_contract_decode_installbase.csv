@@ -1,6 +1,0 @@
-Service_Plan,Eaton_ContractType,Original_Sales_Order__c,SO,Eaton_ContractType_M2M,flag_update
-bronze-1,Flex TM Response Only Contract + Annual PM,1234,1234,Flex TM Response Only Contract + Annual PM,False
-gold,PowerTrust Preferred Plan,7643,,,False
-silver,PowerTrust Plan,6753,,,False
-extended warranty,Warranty Upgrade,9554,9554,PowerTrust Plan,False
-,,5795,,,True

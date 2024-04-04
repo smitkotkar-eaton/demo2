@@ -1,0 +1,6 @@
+SerialNumber,ContractStartDate,ContractEndDate,PredictPulseContractType,BatteryJarsPerTray,BatteryTraysPerString,BatteryMonitoring,NumberOfCabinets,ElectricRoomCleanliness
+Auto_11,2017-03-14T00:00:00,2019-03-13T00:00:00,Basic,2,4,114020001,1,3
+Auto_12,2018-02-15T00:00:00,2019-10-16T00:00:00,Advanced,3,1,114020002,2,7
+Auto_13,2017-03-14T00:00:01,2019-03-13T00:00:01,Basic Wireless,6,4,114020003,1,6
+Auto_14,2018-02-15T00:00:01,2019-10-16T00:00:01,Insight Wirless,2,1,114020004,2,8
+Auto_15,2017-03-14T00:00:02,2019-03-13T00:00:02,Plus 3,2,2,114020005,1,8

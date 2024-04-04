@@ -27,6 +27,7 @@ import logging
 import json
 import os
 
+
 class adlsFunc:
     """
     Process data on ADLS.
@@ -55,15 +56,13 @@ class adlsFunc:
             )
         else:
             ls_cred = dict.fromkeys(ls_cred)
-        # url_vault = "https://keyvaulta3caa815a4.vault.azure.net/" 
-        #destination-adls-connection-string destination-storage-account-name-cip
-            
-            config_dir = os.path.join(os.path.dirname(__file__), "../../config")
-            config_file = os.path.join(config_dir, "config_dcpd.json") 
-        # Read the configuration file
-            with open(config_file,'r') as config_file:
+            config_dir = os.path.join(os.path.dirname(__file__), "../../src")
+            config_file = os.path.join(config_dir, "config_blssrm.json")
+            # Read the configuration file
+            with open(config_file, 'r') as config_file:
                 config = json.load(config_file)
-        url_vault = config['key_vault']
+
+        url_vault = config['KEY_VAULT']
         logging.info(f"inside read credentials : keyvault url is: {url_vault}")
 
         try:
@@ -72,6 +71,7 @@ class adlsFunc:
             secret_client = SecretClient(vault_url=url_vault, credential=credential)
         except Exception as e:
             logging.info(f"Error: {str(e)}")
+            raise e
 
         # Query credentials ADLS Gen2 from Azure keys vaults
         dict_cred = {}
@@ -85,7 +85,7 @@ class adlsFunc:
         return dict_cred
 
     def initialize_ADLS_storage_account(
-        self, storage_account_name, client_id, client_secret, tenant_id
+            self, storage_account_name, client_id, client_secret, tenant_id
     ):
         """
         Connect ADLS gen2 by using Azure Active Directory (Azure AD).
@@ -121,7 +121,7 @@ class adlsFunc:
             return e
 
     def input_file_read(
-        self, connection_string, container_name, file_name, directory_name="", sep=","
+            self, connection_string, container_name, file_name, column_data_types, directory_name="", sep=","
     ):
         """
         Read files stored on ADLS Gen 2.
@@ -130,6 +130,7 @@ class adlsFunc:
         ----------
         container_name : string.
         file_name : string. Name of the file to be read.
+        column_data_types: dictionary of column names and its data types. (Optional)
         directory_name : string, optional
           Sub-folder  within the container. Default is '' i.e file is stored in
           container.
@@ -174,10 +175,9 @@ class adlsFunc:
             else:
                 # If it's not a Parquet file, attempt to read as CSV or Excel
                 try:
-                    logging.info('inside csv:168')
-                    out_df = pd.read_csv(BytesIO(downloaded_bytes), sep=sep)
+                    logging.info('inside csv')
+                    out_df = pd.read_csv(BytesIO(downloaded_bytes), dtype=column_data_types, sep=sep)
                     logging.info(f"type of out_df: {type(out_df)}")
-                    logging.info("inside csv")
                 except Exception as csv_error:
                     return csv_error
 
@@ -188,13 +188,13 @@ class adlsFunc:
             return e
 
     def output_file_write(
-        self,
-        connection_string,
-        dataset,
-        output_container_name,
-        output_file_name,
-        output_directory_name="",
-        escape_char_for_services=""
+            self,
+            connection_string,
+            dataset,
+            output_container_name,
+            output_file_name,
+            file_format,
+            output_directory_name=""
     ):
         """
         Export data to blob storage.
@@ -215,29 +215,25 @@ class adlsFunc:
         """
         try:
             logging.disable(logging.CRITICAL)
-            logging.info("inside class_adlsfunc output write")
-            dataset = dataset.replace("\n", "")
-            logging.info(f"dataset after replace \n: {dataset.shape}")
+
             service_client = DataLakeServiceClient.from_connection_string(
                 str(connection_string)
             )
             container_client = service_client.get_file_system_client(
                 file_system=output_container_name
             )
-            config_dir = os.path.join(os.path.dirname(__file__), "../../config")
-            config_file = os.path.join(config_dir, "config_dcpd.json") 
-            # Read the configuration file
-            with open(config_file,'r') as config_file:
-                config = json.load(config_file)
-            
-            if escape_char_for_services == "services":
-                data = bytes(dataset.to_csv(lineterminator='\n',index=False), encoding='utf-8')
+
+            data, final_file = None, None
+            if file_format == 'csv':
+                dataset = dataset.replace("\n", "")
+                logging.info(f"dataset shape after replacing \n: {dataset.shape}")
+                data = dataset.to_csv(index=False).replace("\r\n", "\n").encode("utf-8")
+                final_file = output_file_name + "." + file_format
+            elif file_format == 'json':
+                data = bytes(json.dumps(dataset), encoding='utf-8')
+                final_file = output_file_name + "." + file_format
             else:
-                data = bytes(dataset.to_csv(lineterminator='\n',index=False,escapechar='\n'), encoding='utf-8')
-            
-            #data = dataset.to_csv(index=False).replace("\r\n", "\n").encode("utf-8")
-            logging.info(f"data after converting to bytes")
-            final_file = output_file_name + ".csv"
+                logging.info(f"Incorrect Format received {file_format}")
 
             if output_directory_name == "":
                 logging.info("output directory name empty")
@@ -261,7 +257,7 @@ class adlsFunc:
             return e
 
     def list_ADLS_directory_contents(
-        self, connection_string, container_name, directory_name=""
+            self, connection_string, container_name, directory_name=""
     ):
         """
         List all files stored in ADLS Gen 2 container.
@@ -352,7 +348,7 @@ class adlsFunc:
             return e
 
     def read_N_club_data(
-        self, connection_string, container_name, directory_name="", sheet_name=""
+            self, connection_string, container_name, directory_name="", sheet_name=""
     ):
         """
         Read and club all the raw data files.
@@ -405,12 +401,12 @@ class adlsFunc:
             return e
 
     def column_name(
-        self,
-        connection_string,
-        container_name,
-        directory_name,
-        file_name="model.json",
-        table="",
+            self,
+            connection_string,
+            container_name,
+            directory_name,
+            file_name="model.json",
+            table="",
     ):
         """
         Read column names from model.json file.
@@ -451,7 +447,7 @@ class adlsFunc:
                 for i in range(0, len(json_data["entities"])):
                     if json_data["entities"][i]["name"] == table:
                         for col in range(
-                            0, len(json_data["entities"][i]["attributes"])
+                                0, len(json_data["entities"][i]["attributes"])
                         ):
                             col_name = json_data["entities"][i]["attributes"][col][
                                 "name"
@@ -467,7 +463,6 @@ class adlsFunc:
             logging.disable(logging.NOTSET)
         except Exception as e:
             return e
-
 
 # %%
 

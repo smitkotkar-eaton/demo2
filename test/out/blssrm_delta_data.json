@@ -1,0 +1,138 @@
+{
+    "ERPSummarys": [
+        {
+            "SerialNumber": "Auto_14",
+            "NumberOfCabinets": 2,
+            "Upm4FanServiceDate": "2023-12-14T09:54:35",
+            "LastServiceDate": "",
+            "ERPContracts": [
+                {
+                    "ContractEndDate": "2019-10-29T00:00:01"
+                }
+            ],
+            "CreationDate": "2024-03-05T10:51:07",
+            "CreatedBy": 3778,
+            "LastUpdateDate": "2024-03-05T10:51:07",
+            "LastUpdatedBy": 3778,
+            "Status": "PENDING",
+            "RecordId": 884879800,
+            "RequestId": "1481741879"
+        },
+        {
+            "SerialNumber": "Auto_13",
+            "NumberOfCabinets": 1,
+            "Upm4FanServiceDate": "2023-01-14T09:54:35",
+            "LastServiceDate": "",
+            "ERPContracts": [
+                {
+                    "ContractEndDate": "2019-03-25T00:00:01"
+                }
+            ],
+            "CreationDate": "2024-03-05T10:51:07",
+            "CreatedBy": 3778,
+            "LastUpdateDate": "2024-03-05T10:51:07",
+            "LastUpdatedBy": 3778,
+            "Status": "PENDING",
+            "RecordId": 884879800,
+            "RequestId": "1855700581"
+        },
+        {
+            "SerialNumber": "Auto_12",
+            "NumberOfCabinets": 2,
+            "Upm4FanServiceDate": "2023-12-14T09:54:34",
+            "LastServiceDate": "",
+            "ERPContracts": [
+                {
+                    "ContractEndDate": "2021-10-20T00:00:00"
+                }
+            ],
+            "CreationDate": "2024-03-05T10:51:07",
+            "CreatedBy": 3778,
+            "LastUpdateDate": "2024-03-05T10:51:07",
+            "LastUpdatedBy": 3778,
+            "Status": "PENDING",
+            "RecordId": 884879800,
+            "RequestId": "232203271"
+        },
+        {
+            "SerialNumber": "Auto_11",
+            "NumberOfCabinets": 1,
+            "Upm4FanServiceDate": "2023-01-14T09:54:34",
+            "LastServiceDate": "",
+            "ERPContracts": [
+                {
+                    "ContractEndDate": "2021-03-15T00:00:00"
+                }
+            ],
+            "CreationDate": "2024-03-05T10:51:07",
+            "CreatedBy": 3778,
+            "LastUpdateDate": "2024-03-05T10:51:07",
+            "LastUpdatedBy": 3778,
+            "Status": "PENDING",
+            "RecordId": 884879800,
+            "RequestId": "423994119"
+        },
+        {
+            "SerialNumber": "Auto_16",
+            "Current": 1.0,
+            "SystemModstamp": "2023-02-14T16:35:59.000+0001",
+            "BatteryJarsPerTray": 2,
+            "BatteryTraysPerString": 2,
+            "BatteryMonitoring": 114020006,
+            "NumberOfCabinets": 2,
+            "ElectricRoomCleanliness": 3,
+            "Upm2FanServiceDate": "2011-04-14T09:52:37",
+            "Upm3FanServiceDate": "2010-10-14T09:53:37",
+            "Upm4FanServiceDate": "2023-01-14T09:54:37",
+            "LastServiceDate": "2023-02-01T01:01:13",
+            "BatteryStrings": 4,
+            "BatteryCabinetType": 114020033,
+            "ElectricAirFilterServiceDate": "2023-10-24T13:14:16",
+            "ERPContracts": [
+                {
+                    "ContractEndDate": "2019-03-13T00:00:03",
+                    "ContractStartDate": "2017-03-14T00:00:03",
+                    "PredictPulseContractType": "Plus 4"
+                }
+            ],
+            "CreationDate": "2024-03-05T10:51:07",
+            "CreatedBy": 3778,
+            "LastUpdateDate": "2024-03-05T10:51:07",
+            "LastUpdatedBy": 3778,
+            "Status": "PENDING",
+            "RecordId": 884879800,
+            "RequestId": "1086421084"
+        },
+        {
+            "SerialNumber": "Auto_17",
+            "Current": 1.0,
+            "SystemModstamp": "2023-02-14T16:35:59.000+0002",
+            "BatteryJarsPerTray": 2,
+            "BatteryTraysPerString": 2,
+            "BatteryMonitoring": 114020007,
+            "NumberOfCabinets": 3,
+            "ElectricRoomCleanliness": 6,
+            "Upm2FanServiceDate": "2011-04-14T09:52:38",
+            "Upm3FanServiceDate": "2010-10-14T09:53:38",
+            "Upm4FanServiceDate": "2023-01-14T09:54:38",
+            "LastServiceDate": "2023-02-01T01:01:14",
+            "BatteryStrings": 5,
+            "BatteryCabinetType": 114020045,
+            "ElectricAirFilterServiceDate": "2023-10-24T13:14:17",
+            "ERPContracts": [
+                {
+                    "ContractEndDate": "2019-03-13T00:00:04",
+                    "ContractStartDate": "2017-03-14T00:00:04",
+                    "PredictPulseContractType": "Plus 5"
+                }
+            ],
+            "CreationDate": "2024-03-05T10:51:07",
+            "CreatedBy": 3778,
+            "LastUpdateDate": "2024-03-05T10:51:07",
+            "LastUpdatedBy": 3778,
+            "Status": "PENDING",
+            "RecordId": 884879800,
+            "RequestId": "1783187695"
+        }
+    ]
+}

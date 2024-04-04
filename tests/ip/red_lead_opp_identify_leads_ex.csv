@@ -1,3 +1,0 @@
-,Job_Index,Total_Quantity,Component,Component_Description,key,End of Prod,Status,Life__Years,EOSL,flag_raise_in_gp,SerialNumber_M2M,Product_M2M_Org,InstallDate,key_value,lead_match,lead_id_basedon,flag_update_sts_leads,temp_column,component,ClosedDate,date_code,source,today,age,flag_include,lead_type
-0,1234.0,23.0,Monochrome Display,,rpp,,Active,10,,,123-3211,rpp,2081-01-16,rpp,exact,Product_M2M,False,display,display,2050-02-11,2050-02-11 00:00:00,Services,2023-12-07 14:08:55.550946,-26,False,Life
-1,1234.0,23.0,Color Display,,pdu,,Active,10,,,123-3210,pdu,2081-01-16,pdu,contains,Product_M2M,False,display,display,2050-02-11,2050-02-11 00:00:00,Services,2023-12-07 14:08:55.550946,-26,False,Life

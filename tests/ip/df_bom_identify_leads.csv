@@ -1,4 +1,0 @@
-Job_Index,PartNumber_TLN_BOM,PartNumber_BOM_BOM,Total_Quantity,InstallDate,Product_M2M,SerialNumber_M2M,Revision,PartNumber_TLN_Shipment
-1234,standard pdu,test1234,23,1/16/2081,pdu,123-3210,0,standard pdu
-1234,standard pdu,test1234,23,1/16/2081,rpp,123-3211,0,standard pdu
-1234,standard pdu,test1234,23,1/16/2081,sts,123-3212,0,standard pdu
