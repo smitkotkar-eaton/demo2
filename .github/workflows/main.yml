@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - main
+      - feature/superchagre_github
       # - feature1
         # - feature_2
           
@@ -16,26 +16,28 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Adding markdown
+        run: echo '### Hello world! 🚀' >> $GITHUB_STEP_SUMMARY
+      # - name: Checkout code
+      #   uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
+      # - name: Set up Python
+      #   uses: actions/setup-python@v4
+      #   with:
+      #     python-version: '3.9'
           
-      - name: Install dependencies
-        run: |
-            python -m pip install --upgrade pip
-            pip install flake8 pytest pytest-cov
-            if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      # - name: Install dependencies
+      #   run: |
+      #       python -m pip install --upgrade pip
+      #       pip install flake8 pytest pytest-cov
+      #       if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      - name: Upload to Artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: fieldanalytics_whl
-          path: dist/*.whl
-          overwrite: 'true'
+      # - name: Upload to Artifacts
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: fieldanalytics_whl
+      #     path: dist/*.whl
+      #     overwrite: 'true'
 
       # - name: Upload artifact
       #   uses: actions/upload-artifact@v3
