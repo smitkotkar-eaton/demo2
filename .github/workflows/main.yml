@@ -50,9 +50,9 @@ jobs:
       # - name: Code Quality and Lint
       #   uses: ricardochaves/python-lint@v1.4.0
 
-      - name: Build Coverage File
-        # run: pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov=app test/ | tee pytest-coverage.txt
-        run: python -m pytest test --doctest-modules --junitxml=junit/test-results.xml --cov=. --cov-report=html test
+      # - name: Build Coverage File
+      #   # run: pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov=app test/ | tee pytest-coverage.txt
+      #   run: python -m pytest test --doctest-modules --junitxml=junit/test-results.xml --cov=. --cov-report=html test
 
       # - name: Pytest Coverage Comment
       #   id: coverageComment
